@@ -146,4 +146,13 @@ describe("splitSdkTools", () => {
       "browser",
     ]);
   });
+
+  it("excludes tools listed in excludeTools (case-insensitive)", () => {
+    const { customTools } = splitSdkTools({
+      tools,
+      sandboxEnabled: false,
+      excludeTools: ["Browser", "EXEC"],
+    });
+    expect(customTools.map((tool) => tool.name)).toEqual(["read", "edit", "write"]);
+  });
 });
