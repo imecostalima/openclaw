@@ -111,6 +111,12 @@ export const AgentDefaultsSchema = z
       })
       .strict()
       .optional(),
+    skills: z
+      .object({
+        lazyLoading: z.boolean().optional(),
+      })
+      .strict()
+      .optional(),
     thinkingDefault: z
       .union([
         z.literal("off"),

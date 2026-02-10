@@ -134,6 +134,8 @@ export type AgentDefaultsConfig = {
   compaction?: AgentCompactionConfig;
   /** Anthropic prompt caching configuration. */
   promptCaching?: AgentPromptCachingConfig;
+  /** Dynamic skill/tool loading configuration. */
+  skills?: AgentSkillsConfig;
   /** Vector memory search configuration (per-agent overrides supported). */
   memorySearch?: MemorySearchConfig;
   /** Default thinking level when no /think directive is present. */
@@ -261,6 +263,11 @@ export type AgentCompactionConfig = {
 export type AgentPromptCachingConfig = {
   /** Enable Anthropic prompt caching breakpoints (default: true). */
   enabled?: boolean;
+};
+
+export type AgentSkillsConfig = {
+  /** Enable lazy loading of skills via compact index + load_skill tool (default: false). */
+  lazyLoading?: boolean;
 };
 
 export type AgentCompactionMemoryFlushConfig = {
