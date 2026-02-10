@@ -59,6 +59,7 @@ import {
 } from "../../skills.js";
 import { buildSystemPromptParams } from "../../system-prompt-params.js";
 import { buildSystemPromptReport } from "../../system-prompt-report.js";
+import { createTokenEfficientToolsWrapper } from "../../token-efficient-tools.js";
 import { resolveTranscriptPolicy } from "../../transcript-policy.js";
 import { DEFAULT_BOOTSTRAP_FILENAME } from "../../workspace.js";
 import { isRunnerAbortError } from "../abort.js";
@@ -534,6 +535,9 @@ export async function runEmbeddedAttempt(
           promptCachingConfig,
         );
       }
+
+      // Apply token-efficient tool use beta header for Anthropic
+      activeSession.agent.streamFn = createTokenEfficientToolsWrapper(activeSession.agent.streamFn);
 
       if (cacheTrace) {
         cacheTrace.recordStage("session:loaded", {
